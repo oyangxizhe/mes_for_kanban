@@ -1,0 +1,615 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using CMES;
+using System.Drawing;
+using System.Data;
+using System.Text;
+
+
+
+namespace WEB_MES_FOR_KANBAN
+{
+    public partial class Main : System.Web.UI.Page
+    {
+        #region nature
+        private static string _FACTORY_AREA;
+        public static string FACTORY_AREA
+        {
+            set { _FACTORY_AREA = value; }
+            get { return _FACTORY_AREA; }
+        }
+        private static string _FACTORY_AREA_CODE;
+        public static string FACTORY_AREA_CODE
+        {
+            set { _FACTORY_AREA_CODE = value; }
+            get { return _FACTORY_AREA_CODE; }
+        }
+        private static string _FABN;
+        public static string FABN
+        {
+            set { _FABN = value; }
+            get { return _FABN; }
+
+        }
+        private static string _SQLCONN;
+        public static string SQLCONN
+        {
+            set { _SQLCONN = value; }
+            get { return _SQLCONN; }
+        }
+        private static string _MACHINE_AREA_ID;
+        public static string MACHINE_AREA_ID
+        {
+            set { _MACHINE_AREA_ID = value; }
+            get { return _MACHINE_AREA_ID; }
+        }
+        private string _BUILD_NO;
+        public string BUILD_NO
+        {
+            set { _BUILD_NO = value; }
+            get { return _BUILD_NO; }
+        }
+        private  string _IP;
+        public  string IP
+        {
+            set { _IP = value; }
+            get { return _IP; }
+
+        }
+        private static int _UPDATE;
+        public static int UPDATE
+        {
+            set { _UPDATE = value; }
+            get { return _UPDATE; }
+
+        }
+        #endregion
+        basec bc = new basec();
+
+        DataTable FACTORY_AREA_dr_worktime_standard =new DataTable(); //調用交班基準表 
+        StringBuilder sqb = new StringBuilder();
+        DataTable dt1 = new DataTable();//取得有關生產數據的數據表
+        CKANBAN ckanban = new CKANBAN();
+        DataTable dtt = new DataTable();//申明一個用于臨時數據存儲的DATATABLE
+        decimal TOTAL_COUNT = 0;//機臺總數
+        decimal  A=0;//正常生產的機臺數
+        decimal  B = 0;//停機數
+        string machineBuildNo = "";//取得棟別
+        SendMail sendmail = new SendMail();
+    
+        //List<string> list = new List<string> {"ksmis-soft@acesconn.com" };
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            HttpCookie cookie = Request.Cookies["cookiename"];
+            hint.Value = "";
+            try
+            {
+               
+                if (cookie.Values["selfactory"] == null)
+                {
+                    Response.Redirect("\\Default.aspx");
+                }
+                else
+                {
+                    if (!IsPostBack)
+                    {
+                        ShowByStringLabel.Text = "";
+                        if (Request.QueryString["FABN"] != null && Request.QueryString["FABN"] != "")
+                        {
+                            FABN = Request.QueryString["FABN"].ToString();
+                            SQLCONN = bc.md_GetConnectionString(FABN);//取得鏈接字符串
+                            fabn.Value = FABN;
+                            FACTORY_AREA_CODE = bc.GET_DT_TO_DV_TO_DT(bc.factorychoose(), "", "FABN='" + FABN + "'").Rows[0]["FACTORY_AREA_CODE"].ToString();
+
+                        }
+                        if (Request.QueryString["build_no"] != null && Request.QueryString["build_no"] != "")
+                        {
+                            build_no.Value = Request.QueryString["build_no"].ToString();
+                            BUILD_NO = Request.QueryString["build_no"].ToString();
+                        }
+                        if (Request.QueryString["update"] != null && Request.QueryString["update"] != "")
+                        {
+                            Text1.Value = Request.QueryString["update"].ToString();
+
+                        }
+                        if (Request.QueryString["page"] != null && Request.QueryString["page"] != "")
+                        {
+                            page.Value = Request.QueryString["page"].ToString();
+
+                        }
+                        if (Request.QueryString["if_show_option"] != null && Request.QueryString["if_show_option"] != "")
+                        {
+                            if_show_option.Value = Request.QueryString["if_show_option"].ToString();
+
+                        }
+                        if (Request.QueryString["roller_speed"] != null && Request.QueryString["roller_speed"] != "")
+                        {
+                            roller_speed.Value = Request.QueryString["roller_speed"].ToString();
+
+                        }
+                        bind();
+                        Bind("");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                hint.Value = "網絡鏈接中斷";
+            }
+
+        }
+        #region bind
+        private void bind()
+        {
+    
+            chart1(GaugeContainer1);
+            chart1(GaugeContainer2);
+            Label1.Text = "";
+            Label2.Text = "";
+            Label3.Text = "";
+            Label4.Text = "";
+            Label5.Text = "";
+            Label6.Text = "";
+            Label7.Text = "";
+            Label8.Text = "";
+
+            Label1.Text = "最后更新時間";
+            Label2.Text = DateTime.Now.ToString();
+            HttpCookie cookie = Request.Cookies["cookiename"];//cookie不能在服務器歘漢字會報錯，歘字母就好
+            L1.Text += "當前制造區域：" + cookie.Values["FACTORY_AREA_CODE"].ToString();
+            L2.Text += "當前工藝：成型";
+            L3.Text = DateTime.Now.ToShortDateString();
+            LinkButton1.ForeColor = Color.FromName("#4D784D");
+            L1.ForeColor = Color.FromName("#4D784D");
+            L2.ForeColor = Color.FromName("#4D784D");
+            L3.ForeColor = Color.FromName("#4D784D");
+            L4.ForeColor = Color.FromName("#4D784D");
+            L4.Text = "當前IP " + cookie.Values["IP"].ToString();
+            string starttime_in = datecka();//starttime_in = 開始時間 
+            string endtime_in = Convert.ToDateTime(DateTime.Now).ToString("yyyy-MM-dd HH:mm").ToString();
+            if (FACTORY_AREA_CODE=="KS" && (BUILD_NO =="A" || BUILD_NO =="B"))
+            {
+                machineBuildNo = BUILD_NO;//只有昆山廠有A,B棟之分
+            }
+            string exeo_Id = "";//執行單號 '接值說明 exeno_in = '執行單號',, ,  endtime_in = '結束時間'
+            string type_in = "ALL";//'計算方式'('';'ALL')
+
+            string sql1 = @"EXEC MES2_ModuleByEfficiency_sp '" + exeo_Id + "','" + type_in + "','" + starttime_in + "','" + endtime_in + "','" + machineBuildNo + "' ";//取得含效率的DATATABLE SQL
+
+           // Response.Write(sql1);
+            DataTable dt = bc.getdt(sql1, SQLCONN);
+            DataTable dtt = RETURN_EMPTY_DT();
+            DataRow dr = dtt.NewRow();
+            dr["TIME"] = 1;
+            double total_efficiency = 0;
+            if (dt.Rows.Count > 0)
+            {
+                total_efficiency = Convert.ToDouble(bc.RETURN_UNTIL_CHAR(dt.Rows[0]["總效率"].ToString(), '%'));
+            }
+            dr["TOTAL_EFFICIENCY"] = total_efficiency;
+            dtt.Rows.Add(dr);
+            GaugeContainer1.CircularGauges[0].Pointers[0].Value = total_efficiency;
+            GaugeContainer1.BackColor = CCOLOR.MAIN_LEFT;
+        
+            double mr=total_efficiency ;
+            chart(total_efficiency, GaugeContainer1);
+            Label3.Text = "效率：" + total_efficiency.ToString() + "%";
+            dt1 = bc.getdt(ckanban.sql + "  order by drma_machine", SQLCONN);//取得機臺總數
+            if (dt1.Rows.Count > 0)
+            {
+                TOTAL_COUNT = dt1.Rows.Count;
+                Label5.Text = "總數：" + dt1.Rows.Count;
+            }
+            else
+            {
+                Label5.Text = "總數：" + "0";
+            }
+            DataTable dtx1 = bc.GET_DT_TO_DV_TO_DT(dt1, "", "drma_drst_eventshow='A-正常生產'");//取得正常生產數
+            if (dtx1.Rows.Count > 0)
+            {
+                A = dtx1.Rows.Count;
+                Label6.Text = "生產：" + dtx1.Rows.Count;
+            }
+            dtx1 = bc.GET_DT_TO_DV_TO_DT(dt1, "", "drma_drst_kind='B.停機'");//取得停機數
+            if (dtx1.Rows.Count > 0)
+            {
+                B = dtx1.Rows.Count;
+                Label7.Text = "停機：" + dtx1.Rows.Count;
+            }
+            dtx1 = bc.GET_DT_TO_DV_TO_DT(dt1, "", "substring(drma_exeno,2,2)='MM' AND drma_drst_kind NOT IN ('B.停機')");//取得試模數
+            if (dtx1.Rows.Count > 0)
+            {
+                Label8.Text = "試模：" + (TOTAL_COUNT - A - B).ToString ();
+            }
+            else
+            {
+                Label8.Text = "試模：" +"0";
+            }
+            dtt = RETURN_EMPTY_DT();
+            DataRow dr1 = dtt.NewRow();
+            dr1["TIME"] = 1;
+            dr1["TOTAL_EFFICIENCY"] = Math.Round(A / (A + B), 2)*100;
+            dtt.Rows.Add(dr1);
+            this.GaugeContainer2.CircularGauges[0].Pointers[0].Value = Convert.ToDouble(Math.Round(A / (A + B), 2)*100);
+            GaugeContainer2.BackColor = CCOLOR.MAIN_LEFT;
+            chart(Convert.ToDouble(Math.Round(A / (A + B), 2) * 100), GaugeContainer2);
+            Label4.Text = "嫁動率：" + Math.Round(A / (A + B), 2) * 100+"%";
+            if (Request.QueryString["update"] != null && Request.QueryString["update"] != "")
+            {
+                Text1.Value = Request.QueryString["update"].ToString();
+            }
+            if (Request.QueryString["if_separate"] != null && Request.QueryString["if_separate"] != "")
+            {
+                if_separate.Value  = Request.QueryString["if_separate"].ToString();
+            }
+ 
+            if (FACTORY_AREA_CODE == "KS")
+            {
+                //DataList3.DataSource = ckanban.RETURN_BUILDING_DT(SQLCONN);
+                //DataList3.DataBind();
+                dt = ckanban.RETURN_BUILDING_DT(SQLCONN);
+                if (dt.Rows.Count > 0)
+                {
+                   
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        RadioButtonList1.Items.Add(dt.Rows[i]["BUILD_NAME"].ToString());
+                        if (dt.Rows[i]["BUILD_NO"].ToString() == BUILD_NO)
+                        {
+                            this.RadioButtonList1.SelectedIndex = i;//將當前棟別默認為選中項
+                        }
+                      
+                    }
+                }
+             
+            
+            }
+          
+        }
+        #endregion
+        #region chart
+        private void chart(double mr,Dundas.Gauges.WebControl.GaugeContainer GN )//圖表顏色區域設置
+        {
+            //效率
+            if (GN == GaugeContainer1)
+            {
+                if (mr >= 80)
+                {
+                    GN.CircularGauges[0].Ranges[0].FillColor = Color.Green;
+                    GN.CircularGauges[0].Ranges[0].StartValue = 80;
+                    GN.CircularGauges[0].Ranges[0].EndValue = 100;
+                }
+
+                else
+                {
+                    GN.CircularGauges[0].Ranges[0].FillColor = Color.Red;
+                    GN.CircularGauges[0].Ranges[0].StartValue = 79;
+                    GN.CircularGauges[0].Ranges[0].EndValue = 0;
+                }
+            }
+            else
+            {
+                //嫁動率
+                if (mr >= 50)
+                {
+                    GN.CircularGauges[0].Ranges[0].FillColor = Color.Green;
+                    GN.CircularGauges[0].Ranges[0].StartValue = 50;
+                    GN.CircularGauges[0].Ranges[0].EndValue = 100;
+                }
+
+                else
+                {
+                    GN.CircularGauges[0].Ranges[0].FillColor = Color.Red;
+                    GN.CircularGauges[0].Ranges[0].StartValue = 49;
+                    GN.CircularGauges[0].Ranges[0].EndValue = 0;
+                }
+            }
+        }
+        #endregion
+        #region chart1
+        private void chart1(Dundas.Gauges.WebControl.GaugeContainer GN)//圖表顏色區域設置
+        {
+            GN.CircularGauges[0].Scales[0].StartAngle = 90;//1/2顯示半圓區域
+            GN.CircularGauges[0].Scales[0].SweepAngle = 180;//2/2顯示半圓區域
+            GN.CircularGauges[0].Scales[0].Maximum = 100;
+            GN.CircularGauges[0].Scales[0].ShadowOffset = 0;
+            GN.CircularGauges[0].Scales[0].Width = 2;
+            GN.CircularGauges[0].Scales[0].FillColor = Color.Black;
+            GN.CircularGauges[0].Scales[0].Radius = 32;
+            GN.CircularGauges[0].Scales[0].LabelStyle.Font = new Font("", 8, FontStyle.Regular);
+            GN.CircularGauges[0].Scales[0].LabelStyle.Placement = Dundas.Gauges.WebControl.Placement.Outside;
+            GN.CircularGauges[0].Scales[0].LabelStyle.FontUnit = Dundas.Gauges.WebControl.FontUnit.Default;
+            GN.CircularGauges[0].Scales[0].MajorTickMark.Width = 2;
+            GN.CircularGauges[0].Scales[0].MajorTickMark.EnableGradient = false;
+            GN.CircularGauges[0].Scales[0].MajorTickMark.BorderWidth = 0;
+            GN.CircularGauges[0].Scales[0].MajorTickMark.FillColor = Color.Black;
+            GN.CircularGauges[0].Scales[0].MajorTickMark.Length = 12;
+            GN.CircularGauges[0].Scales[0].MajorTickMark.Shape = Dundas.Gauges.WebControl.MarkerStyle.Rectangle;
+            GN.CircularGauges[0].Scales[0].MajorTickMark.Placement = Dundas.Gauges.WebControl.Placement.Outside;
+
+            GN.CircularGauges[0].Scales[0].MinorTickMark.Width = 2;
+            GN.CircularGauges[0].Scales[0].MinorTickMark.Placement = Dundas.Gauges.WebControl.Placement.Outside;
+
+            GN.CircularGauges[0].BackFrame.FrameWidth = 0;
+            GN.CircularGauges[0].BackFrame.FrameStyle = Dundas.Gauges.WebControl.BackFrameStyle.Simple;
+            GN.CircularGauges[0].BackFrame.BorderColor = Color.Silver;
+            GN.CircularGauges[0].BackFrame.BackGradientEndColor = CCOLOR.chart1;
+            GN.CircularGauges[0].BackFrame.BackColor = Color.White;
+            GN.CircularGauges[0].BackFrame.BackGradientType = Dundas.Gauges.WebControl.GradientType.TopBottom;
+            GN.CircularGauges[0].BackFrame.BorderWidth = 2;
+            GN.CircularGauges[0].BackFrame.FrameShape = Dundas.Gauges.WebControl.BackFrameShape.AutoShape;//顯示背景距形區域
+            GN.CircularGauges[0].BackFrame.FrameStyle = Dundas.Gauges.WebControl.BackFrameStyle.Simple;//顯示背景距形區域1/3
+            GN.CircularGauges[0].Size.Width = 60;
+            GN.CircularGauges[0].Size.Height = 60;
+            GN.CircularGauges[0].Scales[0].SweepAngle = 180;//2/2顯示半圓區域
+            GN.CircularGauges[0].PivotPoint.X = 50;
+            GN.CircularGauges[0].PivotPoint.Y = 70;
+
+            GN.CircularGauges[0].Pointers[0].DistanceFromScale = 8;
+            GN.CircularGauges[0].Pointers[0].NeedleStyle = Dundas.Gauges.WebControl.NeedleStyle.NeedleStyle4;
+            GN.CircularGauges[0].Pointers[0].FillGradientEndColor = Color.White;
+            GN.CircularGauges[0].Pointers[0].FillColor = Color.Red;
+            GN.CircularGauges[0].Pointers[0].BorderWidth = 0;
+            GN.CircularGauges[0].Pointers[0].ShadowOffset = 1;
+            GN.CircularGauges[0].Pointers[0].Placement = Dundas.Gauges.WebControl.Placement.Outside;
+            GN.CircularGauges[0].Pointers[0].Value = 68;
+
+            GN.CircularGauges[0].Ranges[0].BorderWidth = 0;
+            GN.CircularGauges[0].Ranges[0].StartWidth = 300;
+            GN.CircularGauges[0].Ranges[0].FillGradientEndColor = Color.Yellow;
+            GN.CircularGauges[0].Ranges[0].FillColor = Color.Pink;
+            GN.CircularGauges[0].Ranges[0].DistanceFromScale = -80;//控制背景顏色區域
+            GN.CircularGauges[0].Ranges[0].EndWidth = 300;
+            GN.CircularGauges[0].Ranges[0].FillGradientType = Dundas.Gauges.WebControl.RangeGradientType.None;
+            //GaugeContainer3.BackFrame.FrameStyle = Dundas.Gauges.WebControl.BackFrameStyle.Simple;//顯示背景距形區域1/3
+            //GaugeContainer3.BackFrame.BackGradientType = Dundas.Gauges.WebControl.GradientType.TopBottom;//顯示背景距形區域2/3
+            //GaugeContainer3.BackFrame.FrameShape = Dundas.Gauges.WebControl.BackFrameShape.AutoShape;//顯示背景距形區域3/3
+            GN.BackFrame.BorderColor = Color.Silver;
+            GN.BackFrame.BackGradientEndColor = CCOLOR.chart1;
+            GN.BackFrame.BackColor = Color.White;
+            GN.BackFrame.BorderWidth = 2;
+            GN.BackFrame.FrameStyle = Dundas.Gauges.WebControl.BackFrameStyle.None;
+            GN.BackFrame.FrameGradientType = Dundas.Gauges.WebControl.GradientType.None;
+
+            GN.Labels[0].ResizeMode = Dundas.Gauges.WebControl.ResizeMode.None;
+            GN.Labels[0].TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            GN.Labels[0].Text = FACTORY_AREA_CODE;
+            GN.Labels[0].Size.Height = 100;
+            GN.Labels[0].Size.Width = 100;
+            GN.Labels[0].Location.X = 0;
+            GN.Labels[0].Location.Y = 5;
+        }
+        #endregion
+        #region Bind
+        protected void Bind(string machine_area_id)
+        {
+          
+            DataTable dt = bc.getdt(ckanban.sql, SQLCONN);
+            if (FACTORY_AREA_CODE == "KS" && (BUILD_NO == "A" || BUILD_NO == "B"))
+            {
+                machineBuildNo = BUILD_NO;//只有昆山廠有A,B棟之分
+                dt = bc.GET_DT_TO_DV_TO_DT(dt, "", "drma_building='" + machineBuildNo + "'");
+            }
+            DataTable dtx = new DataTable();
+            dtx.Columns.Add("drma_machine", typeof(string));
+            dtx.Columns.Add("drma_drst_eventshow", typeof(string));
+            dtx.Columns.Add("drma_exeno", typeof(string));
+            dtx.Columns.Add("drma_modno", typeof(string));
+            dtx.Columns.Add("drma_partno", typeof(string));
+            dtx.Columns.Add("drma_production_shedule", typeof(string));
+            dtx.Columns.Add("image_url", typeof(string));
+            dtx.Columns.Add("d_font_color", typeof(string));
+            dtx.Columns.Add("d_background_color", typeof(string));
+            foreach (DataRow dr in dt.Rows)
+            {
+                DataRow dr1 = dtx.NewRow();
+                dr1["drma_machine"] = dr["drma_machine"].ToString();
+                dr1["drma_drst_eventshow"] = dr["drma_drst_eventshow"].ToString();
+                dr1["drma_exeno"] = dr["drma_exeno"].ToString();
+                dr1["drma_modno"] = dr["drma_modno"].ToString();
+                dr1["drma_partno"] = dr["drma_partno"].ToString();
+                dr1["drma_production_shedule"] = "生產進度：" + dr["生產進度"].ToString();
+                switch (dr["drma_drst_eventshow"].ToString())
+                {
+                    case "A-正常生產":
+                        dr1["image_url"] = "Image/Amachine.gif";
+                        dr1["d_font_color"] = "White";
+                        dr1["d_background_color"] = "Green";
+                        break;
+                    case "B-待單":
+                        dr1["image_url"] = "Image/ma1.png";
+                        dr1["d_font_color"] = "Black";
+                        dr1["d_background_color"] = "Yellow";
+                        break;
+                    default:
+                        dr1["image_url"] = "Image/ma1.png";
+                        dr1["d_font_color"] = "White";
+                        dr1["d_background_color"] = "Red";
+                        break;
+
+                }
+                //試模執行單都用橘色
+                if (dr["生產進度數值"].ToString() == "MM")
+                {
+                    dr1["d_background_color"] = "Orange";
+                }
+                if (Convert.ToInt32(dr["生產進度數值"].ToString()) > 100)
+                {
+                    dr1["image_url"] = "Image/lampbig.gif";
+                }
+                dtx.Rows.Add(dr1);
+            }
+            DataTable dtx2 = bc.RETURN_NOHAVE_REPEAT_DT(dt, "drma_class"); //取得區域信息
+            dtt.Columns.Add("MACHINE_AREA_ID", typeof(string));
+            dtt.Columns.Add("PAGE", typeof(string));
+            if (dtx2.Rows.Count > 0)
+            {
+                for (int i = 0; i < dtx2.Rows.Count; i++)
+                {
+                    DataRow dr = dtt.NewRow();
+                    dr["MACHINE_AREA_ID"] = dtx2.Rows[i]["VALUE"].ToString();
+                    dr["PAGE"] = (i + 1).ToString();
+                    dtt.Rows.Add(dr);
+                }
+            }
+            machine_area_count.Value = dtt.Rows.Count.ToString();
+            DataList2.DataSource = dtt;
+            DataList2.DataBind();
+            if (Request.QueryString["if_separate"] != null && Request.QueryString["if_separate"] != "")
+            {
+                if (Request.QueryString["if_separate"].ToString() == "1")
+                {
+                    if (Request.QueryString["page"] != null && Request.QueryString["page"] != "")//分區顯示
+                    {
+
+                        dtt = bc.GET_DT_TO_DV_TO_DT(dtt, "", string.Format("PAGE='{0}'", Request.QueryString["page"].ToString()));
+                        if (dtt.Rows.Count > 0)
+                        {
+                            MACHINE_AREA_ID = dtt.Rows[0]["MACHINE_AREA_ID"].ToString();
+                        }
+
+                        if (dtx.Rows.Count > 0)
+                        {
+                            dtx = bc.GET_DT_TO_DV_TO_DT(dtx, "", string.Format("substring(drma_machine,1,1)='{0}'",
+                                MACHINE_AREA_ID));
+                        }
+                    }
+                    else
+                    {
+
+                        MACHINE_AREA_ID = machine_area_id;
+                    }
+                    dtx = bc.GET_DT_TO_DV_TO_DT(dtx, "", string.Format("substring(drma_machine,1,1)='{0}'",
+                                MACHINE_AREA_ID));
+                }
+                else
+                {//全區顯示
+                }
+            }
+          DataTable dtx3 = bc.getdt("SELECT * FROM [MES2].[dbo].[dr_scrollingtext_parma]", SQLCONN);//獲取看板滾動文字內容
+            if (dtx3.Rows.Count > 0)
+            {
+                sqb.AppendFormat("{0} ", dtx3.Rows[0]["drst_description1"].ToString());
+                sqb.AppendFormat("{0} ", dtx3.Rows[0]["drst_description2"].ToString());
+                sqb.AppendFormat("{0} ", dtx3.Rows[0]["drst_description3"].ToString());
+                sqb.AppendFormat("{0} ", dtx3.Rows[0]["drst_description4"].ToString());
+                sqb.AppendFormat("{0} ", dtx3.Rows[0]["drst_description5"].ToString());
+                ShowByStringLabel.Text = sqb.ToString();
+            }
+
+            ShowByStringLabel.Font.Bold = true;
+            ShowByStringLabel.Font.Name = "新細明體";
+            ShowByStringLabel.Font.Size = 12;
+          
+            dtt = bc.GET_DT_TO_DV_TO_DT(dtx3, "", string.Format("drst_hostip='{0}'", bc.GetIP4Address()));
+
+            if (dtt.Rows.Count > 0)
+            {
+                if (dtt.Rows[0]["drst_fontcolor"].ToString() == "紅色")
+                {
+                    ShowByStringLabel.ForeColor = Color.Red;
+                }
+                else if (dtt.Rows[0]["drst_fontcolor"].ToString() == "藍色")
+                {
+                    ShowByStringLabel.ForeColor = Color.Blue;
+                }
+                else if (dtt.Rows[0]["drst_fontcolor"].ToString() == "綠色")
+                {
+                    ShowByStringLabel.ForeColor = Color.Green;
+                }
+            }
+            else
+            {
+
+                ShowByStringLabel.ForeColor = Color.Blue;
+            }
+         
+
+        
+
+   
+        }
+        #endregion
+        private string datecka()
+        {
+            string ds = "";
+            if (DateTime.Now.Hour >= 7 && DateTime.Now.Hour <= 23)
+            {
+                ds = DateTime.Now.AddDays(0).ToString("yyyy/MM/dd") + " 7:30";
+            }
+            else
+            {
+                ds = DateTime.Now.AddDays(-1).ToString("yyyy/MM/dd") + " 19:30";
+            }
+            return ds;
+        }
+        private DataTable RETURN_EMPTY_DT()
+        {
+            DataTable dtt = new DataTable();
+            dtt.Columns.Add("TIME", typeof(string));
+            dtt.Columns.Add("TOTAL_EFFICIENCY", typeof(string));
+            return dtt;
+        }
+        private DataTable RETURN_EMPTY_DT_BUILDING()
+        {
+            DataTable dtt = new DataTable();
+            dtt.Columns.Add("BUILD_NO", typeof(string));
+            return dtt;
+        }
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            HttpCookie cookie = Request.Cookies["cookiename"];
+            cookie.Expires = DateTime.Now.AddDays(-365);
+            Response.Cookies.Add (cookie);
+            ClearClientPageCache();
+            Response.Redirect("Default.aspx"); 
+        }
+        public void ClearClientPageCache()
+        {
+            //清除浏览器缓存 
+            Response.Buffer = true;
+            Response.ExpiresAbsolute = DateTime.Now.AddDays(-1);
+            Response.Cache.SetExpires(DateTime.Now.AddDays(-1));
+            Response.Expires = 0;
+            Response.CacheControl = "no-cache";
+            Response.Cache.SetNoStore();
+        }
+   
+        protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string BUILD_NAME = RadioButtonList1.SelectedItem.Value;//取得選中的棟別
+                DataTable dt = ckanban.RETURN_BUILDING_DT(SQLCONN);
+                dt = bc.GET_DT_TO_DV_TO_DT(dt, "", "BUILD_NAME='" + BUILD_NAME + "'");
+                if (dt.Rows.Count > 0)
+                {
+                    BUILD_NO = dt.Rows[0]["BUILD_NO"].ToString();//取得廠別簡碼
+                }
+           
+            }
+            catch (Exception ex)
+            {
+                HttpCookie cookie = Request.Cookies["cookiename"];
+                sendmail.send_email("WEB 成型看板出現異常", ex.Message +
+                ckanban.error_info("main.aspx", cookie.Values["IP"].ToString(), cookie.Values["START_TIME"].ToString()),
+                sendmail.LIST, "mes_admin@acesconn.com");
+                hint.Value = "網絡鏈接中斷";
+            }
+            finally
+            {
+                Response.Redirect("main.aspx?page=" + Request.QueryString["page"] +
+               "&update=" + Request.QueryString["update"] +
+               "&if_separate=" + Request.QueryString["if_separate"] +
+               "&fabn=" + FABN +
+               "&build_no=" + BUILD_NO +
+               "&if_show_option=" + Request.QueryString["if_show_option"] +
+               "&roller_speed=" + Request.QueryString["roller_speed"] + "");
+            }
+        }
+    }
+}

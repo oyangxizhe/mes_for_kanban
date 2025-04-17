@@ -1,0 +1,410 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+此檔案是由您 Web 專案的發行/封裝處理程序所使用。您可以編輯此 MSBuild 檔案，
+以自訂此處理程序的行為。若要深入了解，請造訪 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/AjaxControlToolkit.dll">
+      <publishTime>07/04/2012 11:41:06</publishTime>
+    </File>
+    <File Include="bin/CMES.dll">
+      <publishTime>08/19/2016 10:33:16</publishTime>
+    </File>
+    <File Include="bin/DundasWebGauge.dll">
+      <publishTime>03/08/2016 11:03:20</publishTime>
+    </File>
+    <File Include="bin/WEB_MES_FOR_KANBAN.dll">
+      <publishTime>08/19/2016 10:48:53</publishTime>
+    </File>
+    <File Include="Css/120610.css">
+      <publishTime>09/01/2013 17:03:22</publishTime>
+    </File>
+    <File Include="Css/130426b.css">
+      <publishTime>09/01/2013 17:31:54</publishTime>
+    </File>
+    <File Include="Css/c072701.css">
+      <publishTime>05/30/2013 09:15:34</publishTime>
+    </File>
+    <File Include="Css/c120807o.css">
+      <publishTime>05/09/2013 15:29:46</publishTime>
+    </File>
+    <File Include="Css/S130424.css">
+      <publishTime>06/08/2015 17:49:24</publishTime>
+    </File>
+    <File Include="Css/S131017.css">
+      <publishTime>04/22/2016 10:56:20</publishTime>
+    </File>
+    <File Include="Css/SSBase.css">
+      <publishTime>05/04/2016 22:51:20</publishTime>
+    </File>
+    <File Include="Css/view.css">
+      <publishTime>05/17/2016 10:07:50</publishTime>
+    </File>
+    <File Include="Default.aspx">
+      <publishTime>05/16/2016 09:27:24</publishTime>
+    </File>
+    <File Include="Defaut.aspx">
+      <publishTime>04/21/2016 15:10:35</publishTime>
+    </File>
+    <File Include="error_page.aspx">
+      <publishTime>05/05/2016 16:32:07</publishTime>
+    </File>
+    <File Include="Image/1.png">
+      <publishTime>04/21/2016 15:06:21</publishTime>
+    </File>
+    <File Include="Image/10.png">
+      <publishTime>12/14/2014 11:09:37</publishTime>
+    </File>
+    <File Include="Image/11.png">
+      <publishTime>12/14/2014 11:54:20</publishTime>
+    </File>
+    <File Include="Image/12.png">
+      <publishTime>12/14/2014 11:59:48</publishTime>
+    </File>
+    <File Include="Image/13.png">
+      <publishTime>12/14/2014 11:10:57</publishTime>
+    </File>
+    <File Include="Image/14.png">
+      <publishTime>12/14/2014 13:08:06</publishTime>
+    </File>
+    <File Include="Image/15.png">
+      <publishTime>12/14/2014 13:07:50</publishTime>
+    </File>
+    <File Include="Image/16.png">
+      <publishTime>12/14/2014 13:12:02</publishTime>
+    </File>
+    <File Include="Image/17.png">
+      <publishTime>12/14/2014 13:17:19</publishTime>
+    </File>
+    <File Include="Image/18.png">
+      <publishTime>12/14/2014 11:14:15</publishTime>
+    </File>
+    <File Include="Image/19.png">
+      <publishTime>12/14/2014 13:29:14</publishTime>
+    </File>
+    <File Include="Image/2.gif">
+      <publishTime>05/15/2013 12:23:42</publishTime>
+    </File>
+    <File Include="Image/2.png">
+      <publishTime>12/14/2014 09:56:24</publishTime>
+    </File>
+    <File Include="Image/20.png">
+      <publishTime>12/14/2014 14:01:44</publishTime>
+    </File>
+    <File Include="Image/201.png">
+      <publishTime>12/14/2014 12:22:13</publishTime>
+    </File>
+    <File Include="Image/21.png">
+      <publishTime>12/14/2014 14:02:37</publishTime>
+    </File>
+    <File Include="Image/211.png">
+      <publishTime>12/14/2014 13:57:33</publishTime>
+    </File>
+    <File Include="Image/23.png">
+      <publishTime>12/14/2014 14:24:32</publishTime>
+    </File>
+    <File Include="Image/24.png">
+      <publishTime>12/14/2014 14:28:48</publishTime>
+    </File>
+    <File Include="Image/25.png">
+      <publishTime>12/14/2014 11:23:20</publishTime>
+    </File>
+    <File Include="Image/26.png">
+      <publishTime>12/14/2014 14:44:20</publishTime>
+    </File>
+    <File Include="Image/27.png">
+      <publishTime>12/14/2014 14:48:02</publishTime>
+    </File>
+    <File Include="Image/28.png">
+      <publishTime>12/14/2014 14:54:24</publishTime>
+    </File>
+    <File Include="Image/29.png">
+      <publishTime>12/14/2014 15:05:02</publishTime>
+    </File>
+    <File Include="Image/3.png">
+      <publishTime>12/14/2014 10:20:22</publishTime>
+    </File>
+    <File Include="Image/30.png">
+      <publishTime>12/14/2014 11:47:39</publishTime>
+    </File>
+    <File Include="Image/31.png">
+      <publishTime>12/14/2014 11:32:32</publishTime>
+    </File>
+    <File Include="Image/32.png">
+      <publishTime>12/14/2014 15:10:34</publishTime>
+    </File>
+    <File Include="Image/33.png">
+      <publishTime>06/06/2015 17:08:39</publishTime>
+    </File>
+    <File Include="Image/34.png">
+      <publishTime>06/06/2015 17:13:50</publishTime>
+    </File>
+    <File Include="Image/35.png">
+      <publishTime>01/01/2015 12:45:18</publishTime>
+    </File>
+    <File Include="Image/36.png">
+      <publishTime>06/06/2015 21:14:35</publishTime>
+    </File>
+    <File Include="Image/37.png">
+      <publishTime>05/21/2015 19:40:20</publishTime>
+    </File>
+    <File Include="Image/38.png">
+      <publishTime>06/06/2015 21:47:47</publishTime>
+    </File>
+    <File Include="Image/39.png">
+      <publishTime>12/14/2014 11:30:12</publishTime>
+    </File>
+    <File Include="Image/4.png">
+      <publishTime>12/14/2014 11:05:29</publishTime>
+    </File>
+    <File Include="Image/40.png">
+      <publishTime>12/14/2014 10:22:13</publishTime>
+    </File>
+    <File Include="Image/41.png">
+      <publishTime>12/14/2014 15:19:56</publishTime>
+    </File>
+    <File Include="Image/42.png">
+      <publishTime>12/14/2014 15:21:51</publishTime>
+    </File>
+    <File Include="Image/43.png">
+      <publishTime>06/06/2015 22:07:48</publishTime>
+    </File>
+    <File Include="Image/44.png">
+      <publishTime>12/14/2014 13:13:47</publishTime>
+    </File>
+    <File Include="Image/45.png">
+      <publishTime>06/06/2015 22:20:37</publishTime>
+    </File>
+    <File Include="Image/46.png">
+      <publishTime>06/06/2015 23:49:03</publishTime>
+    </File>
+    <File Include="Image/47.png">
+      <publishTime>06/06/2015 23:49:34</publishTime>
+    </File>
+    <File Include="Image/48.png">
+      <publishTime>12/14/2014 13:16:04</publishTime>
+    </File>
+    <File Include="Image/5.png">
+      <publishTime>12/14/2014 11:35:22</publishTime>
+    </File>
+    <File Include="Image/50.png">
+      <publishTime>06/07/2015 15:15:08</publishTime>
+    </File>
+    <File Include="Image/500.png">
+      <publishTime>06/07/2015 15:08:48</publishTime>
+    </File>
+    <File Include="Image/51.png">
+      <publishTime>06/07/2015 15:18:09</publishTime>
+    </File>
+    <File Include="Image/52.png">
+      <publishTime>06/07/2015 15:21:03</publishTime>
+    </File>
+    <File Include="Image/53.png">
+      <publishTime>06/07/2015 15:23:09</publishTime>
+    </File>
+    <File Include="Image/54.png">
+      <publishTime>06/07/2015 15:26:48</publishTime>
+    </File>
+    <File Include="Image/55.png">
+      <publishTime>06/07/2015 15:28:51</publishTime>
+    </File>
+    <File Include="Image/56.png">
+      <publishTime>06/07/2015 15:19:46</publishTime>
+    </File>
+    <File Include="Image/57.png">
+      <publishTime>06/07/2015 15:31:00</publishTime>
+    </File>
+    <File Include="Image/58.png">
+      <publishTime>06/07/2015 15:47:20</publishTime>
+    </File>
+    <File Include="Image/59.png">
+      <publishTime>06/07/2015 15:42:55</publishTime>
+    </File>
+    <File Include="Image/6.png">
+      <publishTime>12/14/2014 11:37:45</publishTime>
+    </File>
+    <File Include="Image/60.png">
+      <publishTime>06/07/2015 15:55:24</publishTime>
+    </File>
+    <File Include="Image/61.png">
+      <publishTime>06/07/2015 15:55:40</publishTime>
+    </File>
+    <File Include="Image/62.png">
+      <publishTime>06/07/2015 16:00:23</publishTime>
+    </File>
+    <File Include="Image/63.png">
+      <publishTime>06/07/2015 16:02:05</publishTime>
+    </File>
+    <File Include="Image/64.png">
+      <publishTime>06/08/2015 18:02:31</publishTime>
+    </File>
+    <File Include="Image/65.png">
+      <publishTime>06/08/2015 17:53:02</publishTime>
+    </File>
+    <File Include="Image/66.png">
+      <publishTime>06/08/2015 17:53:11</publishTime>
+    </File>
+    <File Include="Image/67.png">
+      <publishTime>06/08/2015 17:59:15</publishTime>
+    </File>
+    <File Include="Image/68.png">
+      <publishTime>06/08/2015 18:01:25</publishTime>
+    </File>
+    <File Include="Image/69.png">
+      <publishTime>06/08/2015 18:06:00</publishTime>
+    </File>
+    <File Include="Image/7.png">
+      <publishTime>12/14/2014 10:02:37</publishTime>
+    </File>
+    <File Include="Image/70.png">
+      <publishTime>06/08/2015 21:28:10</publishTime>
+    </File>
+    <File Include="Image/71.png">
+      <publishTime>06/08/2015 21:31:24</publishTime>
+    </File>
+    <File Include="Image/72.png">
+      <publishTime>06/08/2015 21:34:32</publishTime>
+    </File>
+    <File Include="Image/73.png">
+      <publishTime>06/08/2015 21:37:01</publishTime>
+    </File>
+    <File Include="Image/74.png">
+      <publishTime>06/08/2015 21:40:13</publishTime>
+    </File>
+    <File Include="Image/75.png">
+      <publishTime>06/08/2015 21:48:57</publishTime>
+    </File>
+    <File Include="Image/76.png">
+      <publishTime>01/09/2015 23:02:58</publishTime>
+    </File>
+    <File Include="Image/77.png">
+      <publishTime>06/06/2015 21:48:38</publishTime>
+    </File>
+    <File Include="Image/78.png">
+      <publishTime>06/08/2015 22:10:21</publishTime>
+    </File>
+    <File Include="Image/78x.png">
+      <publishTime>06/08/2015 22:05:09</publishTime>
+    </File>
+    <File Include="Image/79.png">
+      <publishTime>06/08/2015 22:09:22</publishTime>
+    </File>
+    <File Include="Image/8.png">
+      <publishTime>12/14/2014 11:40:48</publishTime>
+    </File>
+    <File Include="Image/80.png">
+      <publishTime>06/08/2015 22:02:48</publishTime>
+    </File>
+    <File Include="Image/81.png">
+      <publishTime>06/08/2015 22:18:15</publishTime>
+    </File>
+    <File Include="Image/82.png">
+      <publishTime>06/07/2015 15:21:03</publishTime>
+    </File>
+    <File Include="Image/83.png">
+      <publishTime>06/08/2015 22:23:37</publishTime>
+    </File>
+    <File Include="Image/84.png">
+      <publishTime>06/08/2015 22:27:52</publishTime>
+    </File>
+    <File Include="Image/85.png">
+      <publishTime>06/08/2015 22:30:25</publishTime>
+    </File>
+    <File Include="Image/9.png">
+      <publishTime>12/14/2014 11:43:50</publishTime>
+    </File>
+    <File Include="Image/Amachine.gif">
+      <publishTime>03/29/2016 11:24:19</publishTime>
+    </File>
+    <File Include="Image/bg.png">
+      <publishTime>10/16/2013 17:08:20</publishTime>
+    </File>
+    <File Include="Image/btnAdd.png">
+      <publishTime>11/05/2013 11:36:08</publishTime>
+    </File>
+    <File Include="Image/btnDelete.png">
+      <publishTime>11/02/2013 17:07:08</publishTime>
+    </File>
+    <File Include="Image/btnEdit.png">
+      <publishTime>11/02/2013 16:51:26</publishTime>
+    </File>
+    <File Include="Image/btnExit.png">
+      <publishTime>11/02/2013 21:28:52</publishTime>
+    </File>
+    <File Include="Image/btnlogin4.png">
+      <publishTime>05/03/2016 07:45:10</publishTime>
+    </File>
+    <File Include="Image/btnPrint.png">
+      <publishTime>11/16/2013 18:20:36</publishTime>
+    </File>
+    <File Include="Image/btnSave.png">
+      <publishTime>11/02/2013 18:59:26</publishTime>
+    </File>
+    <File Include="Image/btnSearch.png">
+      <publishTime>11/02/2013 22:12:10</publishTime>
+    </File>
+    <File Include="Image/error_page.png">
+      <publishTime>05/12/2016 10:13:55</publishTime>
+    </File>
+    <File Include="Image/Excel_big.png">
+      <publishTime>04/11/2014 17:23:42</publishTime>
+    </File>
+    <File Include="Image/lampbig.gif">
+      <publishTime>03/29/2016 11:24:19</publishTime>
+    </File>
+    <File Include="Image/loading.gif">
+      <publishTime>05/15/2013 12:23:42</publishTime>
+    </File>
+    <File Include="Image/login.png">
+      <publishTime>10/16/2013 17:08:20</publishTime>
+    </File>
+    <File Include="Image/logo.png">
+      <publishTime>05/16/2016 16:20:23</publishTime>
+    </File>
+    <File Include="Image/logo2.png">
+      <publishTime>04/21/2016 14:53:30</publishTime>
+    </File>
+    <File Include="Image/logo_index.png">
+      <publishTime>04/22/2016 14:33:49</publishTime>
+    </File>
+    <File Include="Image/ma1.png">
+      <publishTime>03/29/2016 11:24:19</publishTime>
+    </File>
+    <File Include="Image/top.jpg">
+      <publishTime>10/16/2013 17:08:20</publishTime>
+    </File>
+    <File Include="Image/Update.ico">
+      <publishTime>10/16/2013 09:47:56</publishTime>
+    </File>
+    <File Include="Js/jquery.min.js">
+      <publishTime>05/16/2016 13:10:08</publishTime>
+    </File>
+    <File Include="Main.aspx">
+      <publishTime>08/19/2016 10:38:18</publishTime>
+    </File>
+    <File Include="Validate.aspx">
+      <publishTime>05/10/2016 08:29:17</publishTime>
+    </File>
+    <File Include="VIEW.aspx">
+      <publishTime>08/19/2016 10:34:10</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>08/19/2016 10:48:55</publishTime>
+    </File>
+    <File Include="WebForm1.aspx">
+      <publishTime>04/25/2016 09:05:57</publishTime>
+    </File>
+    <File Include="WebForm2.aspx">
+      <publishTime>04/27/2016 13:08:19</publishTime>
+    </File>
+    <File Include="WebService1.asmx">
+      <publishTime>10/21/2014 00:09:50</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

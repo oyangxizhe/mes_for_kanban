@@ -1,0 +1,68 @@
+D:\MES\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.dll
+D:\MES\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.pdb
+D:\MES\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.csprojResolveAssemblyReference.cache
+D:\MES\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.dll
+D:\MES\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.pdb
+D:\MES 之前不穩定的WEB成型看板程序版本\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.dll
+D:\MES 之前不穩定的WEB成型看板程序版本\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.pdb
+D:\MES 之前不穩定的WEB成型看板程序版本\MES\WEB_MES_FOR_KANBAN\bin\CMES.pdb
+D:\MES 之前不穩定的WEB成型看板程序版本\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.csprojResolveAssemblyReference.cache
+D:\MES 之前不穩定的WEB成型看板程序版本\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.dll
+D:\MES 之前不穩定的WEB成型看板程序版本\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.pdb
+D:\SourceCode\Kanban_Web\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.dll
+D:\SourceCode\Kanban_Web\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.pdb
+D:\SourceCode\Kanban_Web\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.csprojResolveAssemblyReference.cache
+D:\SourceCode\Kanban_Web\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.dll
+D:\SourceCode\Kanban_Web\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\15.加利斯看板\Kanban_Web\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\15.加利斯看板\Kanban_Web\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\15.加利斯看板\Kanban_Web\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.csprojResolveAssemblyReference.cache
+D:\shaojin\15.加利斯看板\Kanban_Web\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\15.加利斯看板\Kanban_Web\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\15.加利斯看板\Kanban_Web_JLS\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\15.加利斯看板\Kanban_Web_JLS\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\15.加利斯看板\Kanban_Web_JLS\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.csprojResolveAssemblyReference.cache
+D:\shaojin\15.加利斯看板\Kanban_Web_JLS\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\15.加利斯看板\Kanban_Web_JLS\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\15.加利斯看板\Kanban_Web_JLS\MES\WEB_MES_FOR_KANBAN\bin\CMES.pdb
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.csprojResolveAssemblyReference.cache
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS\MES\WEB_MES_FOR_KANBAN\bin\CMES.pdb
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版\MES\WEB_MES_FOR_KANBAN\bin\CMES.pdb
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.csprojResolveAssemblyReference.cache
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版 - 無圖表版本\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版 - 無圖表版本\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版 - 無圖表版本\MES\WEB_MES_FOR_KANBAN\bin\CMES.pdb
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版 - 無圖表版本\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.csprojResolveAssemblyReference.cache
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版 - 無圖表版本\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版 - 無圖表版本\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版 - 無圖表版本 - 字體增大版\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版 - 無圖表版本 - 字體增大版\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版 - 無圖表版本 - 字體增大版\MES\WEB_MES_FOR_KANBAN\bin\CMES.pdb
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版 - 無圖表版本 - 字體增大版\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.csprojResolveAssemblyReference.cache
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版 - 無圖表版本 - 字體增大版\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\15_加利斯看板\Kanban_Web_JLS -含制程版 - 無圖表版本 - 字體增大版\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\24_倉庫看板\inventroy\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\24_倉庫看板\inventroy\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\24_倉庫看板\inventroy\MES\WEB_MES_FOR_KANBAN\bin\CMES.pdb
+D:\shaojin\24_倉庫看板\inventroy\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.csprojResolveAssemblyReference.cache
+D:\shaojin\24_倉庫看板\inventroy\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\24_倉庫看板\inventroy\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\24_倉庫看板\inventroy_gridview\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\24_倉庫看板\inventroy_gridview\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.pdb
+D:\shaojin\24_倉庫看板\inventroy_gridview\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.csprojResolveAssemblyReference.cache
+D:\shaojin\24_倉庫看板\inventroy_gridview\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.dll
+D:\shaojin\24_倉庫看板\inventroy_gridview\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.pdb
+D:\苏州好用软件有限公司软件作品\客户周云昌先生_170408\KANBAN\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.dll
+D:\苏州好用软件有限公司软件作品\客户周云昌先生_170408\KANBAN\MES\WEB_MES_FOR_KANBAN\bin\WEB_MES_FOR_KANBAN.pdb
+D:\苏州好用软件有限公司软件作品\客户周云昌先生_170408\KANBAN\MES\WEB_MES_FOR_KANBAN\bin\CMES.pdb
+D:\苏州好用软件有限公司软件作品\客户周云昌先生_170408\KANBAN\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.csprojResolveAssemblyReference.cache
+D:\苏州好用软件有限公司软件作品\客户周云昌先生_170408\KANBAN\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.dll
+D:\苏州好用软件有限公司软件作品\客户周云昌先生_170408\KANBAN\MES\WEB_MES_FOR_KANBAN\obj\Release\WEB_MES_FOR_KANBAN.pdb

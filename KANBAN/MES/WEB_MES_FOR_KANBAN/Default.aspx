@@ -1,0 +1,134 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WEB_MES_FOR_KANBAN._Default" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
+<meta name ="Description" content ="WEB MES" />
+<meta name ="keywords" content ="WEB MES" />
+  <link href ="Css/SSBase.css"  type ="text/css" rel ="Stylesheet" />
+
+
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <input id="hint" type="hidden"  runat="server" />
+         <input id="factory_area_code" type="hidden"  runat="server" />
+                <div class="Default_top">
+            <div style="display:inline;"><img src="Image/logo2.png" /></div>
+        </div>
+        <div style="height:360px;margin-top:40px; margin-bottom:0px;">
+            <div style="width:45%; float:left; border-right:solid 1px #ccc; height:100%; text-align:right; padding-right:30px;">
+                <br />
+                <br />
+                <img id="Img1" src="" runat="server" /><br />
+          <div></div>
+                      <div style=" color :#990033 "></div>
+                <div style="height:36px; line-height:36px; display:none ;"><a href="" target=_blank>堆翑</a></div>
+            </div>
+            <div style=" width:49%; float:right; ">
+            
+             
+      
+      
+        <div style =" float :left ; width:97%; height :7%; margin-bottom :2%;  background-color:#ce7e88; margin-left :3%;">生產看板</div>
+      <div  class ="c14112101">
+                       <div class="c14112102">廠區</div>
+                       <div class="c14112103"> 
+<div class="c14103009" id ="Div16">
+<asp:RadioButtonList ID="RadioButtonList1" RepeatColumns="10" runat="server" 
+    OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged" AutoPostBack="true"></asp:RadioButtonList>
+
+           </div>            </div>
+                       
+                      <div id="i13102301" style ="float:right ; color :Red ;width:30%; height :7%; ">
+                           <asp:Label ID="prompt" runat="server" CssClass ="" ></asp:Label></div>
+                     
+                          </div>  
+                            
+                            
+                            
+                            
+                            <div style =" float :left ; width:100%;margin-top :2%;">
+                              <div class="c14112102"><span style="margin-top:50px; ">区域</span><br />
+                                </div>
+                      
+                                         <div class="c14112103"> 
+<div class="c14103009" id ="Div3">
+<asp:DataList ID="DataList2" runat="server" RepeatColumns="10"  >
+                　<ItemTemplate >    
+<input id='<%#Eval("PROCESS") %>' name="<%#Eval("PROCESS") %>"  checked="checked" onclick="b1(this.value)" type="radio" 
+    value="<%#Eval("PROCESS") %>" /> <%#Eval("PROCESS") %>    
+</ItemTemplate> 　
+</asp:DataList>
+           </div> 
+                       </div>
+                       
+                      <div id="Div1" style ="float:right ; color :Red ;width:30%; height :7%; ">
+                           </div>
+                      
+                      
+                       <div id="Div2" style =" float :left ;color :Red ; margin-left :11%; width:89%; margin-top :5%; height :7%"> 
+                        <asp:ImageButton ID="btnLogin" runat="server" ImageUrl="~/Image/btnlogin4.png" 
+                            onclick="btnLogin_Click" />
+                           </div>
+                     
+            </div>
+     
+        </div>
+  
+        
+    </div>
+         <script type ="text/javascript" >
+             var v_factory_area_code = document.getElementById("factory_area_code").value;
+             function login() {
+             
+                 document.getElementById("btnLogin").click();
+                 
+             }
+             function enter2tab(e) {
+                 if (window.event.keyCode == 13) window.event.keyCode = 9
+             }
+             document.onkeydown = enter2tab;
+        
+             window.onload = function onlaod1() {
+            
+                 var Invocation = document.getElementById("hint").value;
+                 if (Invocation != "") {
+                     document.getElementById("i13102301").style.display = "block";
+                     document.all("prompt").innerText = Invocation;
+                 }
+                 else {
+                     document.getElementById("i13102301").style.display = "none";
+                     //document.getElementById("Text1").focus();
+                 }
+                 if (document.getElementById("factory_area_code").value != "") {
+                     //document.getElementById(v_factory_area_code).checked = true;
+
+                 }
+
+             }
+             function b(obj)
+             {
+                 var dom = document.all;
+                 var ele = event.srcElement;
+                 if (ele.tagName == "INPUT" && ele.type.toLowerCase() == "radio")
+                 {
+                     for (i = 0; i < dom.length; i++)
+                     {
+                         if (dom[i].tagName == "INPUT" && dom[i].type.toLowerCase() == "radio")
+                         { dom[i].checked = false; }
+                     }
+                 }
+                 ele.checked = true;
+
+             }
+     
+              </script>
+    </form>
+</body>
+</html>

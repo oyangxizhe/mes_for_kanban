@@ -1,0 +1,392 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Main.aspx.cs" Inherits="WEB_MES_FOR_KANBAN.Main" %>
+
+<%@ Register assembly="DundasWebGauge" namespace="Dundas.Gauges.WebControl" tagprefix="DGWC" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title>即時生產表現儀表板</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
+<meta name ="Description" content ="即時生產表現儀表板" />
+<meta name ="keywords" content =<"即時生產表現儀表板" />
+
+    <link rel="Stylesheet" href="Css/view.css" type ="text/css" />
+    <style type="text/css">
+        #TextArea1 {
+            width: 24px;
+        }
+    </style>
+    <script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body  class ="c131010701"  onload ="onload1()">
+<form id="Form1" runat ="server" >
+     <input id="url" type="hidden"  runat="server" />
+    <input id="usido" type="hidden"  runat="server" />
+    <input id="machine_area_count" type="hidden"  runat="server" />
+    <input id="if_separate" type="hidden"  runat="server" />
+    <input id="build_no" type="hidden"  runat="server" />
+    <input id="fabn" type="hidden"  runat="server" />
+    <input id="hint" type="hidden"  runat="server" />
+    <input id="page" type="hidden"  runat="server" />
+    <input id="update" type="hidden"  runat="server" />
+    <input id="if_show_option" type="hidden"  runat="server" />
+    <input id="roller_speed" type="hidden"  runat="server" />
+  <div>
+      
+<div  class="c13042401">
+             <div class ="c13051001">
+      <div class="c13052503" id ="Div2">
+   <span class="c13052504" id ="Span1"><img src ="Image/logo_index.png" alt ="" /></span>
+       </div>
+       
+          <div class="c13052908" id ="Div3">
+<img id="i13052801" src=""  alt=""  style =" display :none ; float :left ; margin-top :16px; color :Blue "/>
+          <span style =" margin-right :0px;"><asp:Label ID="L1" runat="server" ></asp:Label></span>
+         <span style =" margin-left :10px;"><asp:Label ID="L2" runat="server" ></asp:Label></span>
+         <span style =" margin-left :10px;"><asp:Label ID="L3" runat="server" ></asp:Label></span>
+         <span style =" margin-left :10px;"><asp:Label ID="L4" runat="server" ></asp:Label></span>
+         <span  style =" margin-left :10px;">  
+             <a href ="Default.aspx" target ="_top">
+              <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click" >退出</asp:LinkButton>
+              </a></span>
+              
+                     </div>
+                 <div class ="c1305290801">
+                     
+                     <img src ="Image/top.jpg" alt ="" style="height:100%; width:100%" />
+   </div>
+
+    </div> 
+  <div id="13102901" class="c13102901" />
+      <div class="c13051201" id="i13053105">
+   <span class="c13051005" >  
+          <asp:Label ID="Label1" runat="server" Text="Label" CssClass="c1305100501"></asp:Label>   
+          </span>
+             <span class="c13051005" >  
+          <asp:Label ID="Label2" runat="server" Text="Label" CssClass="c1305100501"></asp:Label>   
+          </span>
+          <span class="c1305100502" >
+              <DGWC:GaugeContainer ID="GaugeContainer1" runat="server" Height="240px" Width="320px">
+              <BackFrame Style="None" />
+              <CircularGauges>
+                  <DGWC:CircularGauge Name="Default_AutoRunWizard">
+                      <Ranges>
+                          <DGWC:CircularRange Name="Default" />
+                      </Ranges>
+                      <Pointers>
+                          <DGWC:CircularPointer Name="Default" />
+                      </Pointers>
+                      <BackFrame Style="Edged" />
+                      <Scales>
+                          <DGWC:CircularScale Name="Default">
+                          </DGWC:CircularScale>
+                      </Scales>
+                  </DGWC:CircularGauge>
+              </CircularGauges>
+              <Values>
+                  <DGWC:InputValue Name="Default">
+                  </DGWC:InputValue>
+              </Values>
+          </DGWC:GaugeContainer>
+          </span>
+         <span class="c13051005" >  
+          <asp:Label ID="Label3" runat="server" Text="Label" CssClass="c1305100501"></asp:Label>   
+          </span>
+                    <span class="c1305100502" >
+        <span style ="margin-left:2px">
+<DGWC:GaugeContainer ID="GaugeContainer2" runat="server" Height="240px" Width="320px">
+              <BackFrame Style="None" />
+              <CircularGauges>
+                  <DGWC:CircularGauge Name="Default_AutoRunWizard">
+                      <Ranges>
+                          <DGWC:CircularRange Name="Default" />
+                      </Ranges>
+                      <Pointers>
+                          <DGWC:CircularPointer Name="Default" />
+                      </Pointers>
+                      <BackFrame Style="Edged" />
+                      <Scales>
+                          <DGWC:CircularScale Name="Default">
+                          </DGWC:CircularScale>
+                      </Scales>
+                  </DGWC:CircularGauge>
+              </CircularGauges>
+              <Values>
+                  <DGWC:InputValue Name="Default">
+                  </DGWC:InputValue>
+              </Values>
+          </DGWC:GaugeContainer>
+          </span>
+  </span>
+         <span class="c13051005" >  
+          <asp:Label ID="Label4" runat="server" Text="Label" CssClass="c1305100501"></asp:Label>   
+          </span>
+          <div class="c13051005020101" >
+    <div class ="c1605030101">
+               <span class="c13051005" >  
+          <asp:Label ID="Label5" runat="server" Text="Label" CssClass="c1305100501"></asp:Label>   
+          </span>
+              <span class="c13051005" >  
+          <asp:Label ID="Label6" runat="server" Text="Label" CssClass="c1305100501"></asp:Label>   
+          </span>
+              <span class="c13051005" >  
+          <asp:Label ID="Label7" runat="server" Text="Label" CssClass="c1305100501"></asp:Label>   
+          </span>
+              <span class="c13051005" >  
+          <asp:Label ID="Label8" runat="server" Text="Label" CssClass="c1305100501"></asp:Label>   
+          </span>
+    </div>
+     
+          </div>
+          <span class="c13051005" >  
+             <input id="Checkbox2" type="checkbox" onclick="f15060703()" />顯示看板設定   
+          </span>
+       <div class="c130510050201" >
+    <div class ="c16050301" id="i16051601">
+        <span class="c130510050101" >  
+         看板設定</span> 
+         <span class="c13051005" >  
+        <input id="Text1"  runat="server" type="text"  class ="c14062901"/>刷新頻率(秒)
+          </span>
+         <span class="c13051005" >  
+        <input id="Text2"  runat="server" type="text"  class ="c14062901"/>滾軸速度(毫秒)
+          </span>
+         <span class="c13051005" >  
+     <input id="Checkbox1" type="checkbox" onclick="f15060702()" />分區否
+          </span>
+              <span class="c13051005" >  
+<asp:RadioButtonList ID="RadioButtonList1" RepeatColumns="10" runat="server" 
+    OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged" AutoPostBack="true"></asp:RadioButtonList>
+          </span>
+    </div>
+          
+          </div>
+       </div>
+        <div class="c13051202" id ="i13053106">
+                               <div class ="c14103007">
+<div class ="c13051001">
+      <div class="c1305250301" id ="Div4">
+          <asp:Label ID="ShowByStringLabel" runat="server" Text="Label"></asp:Label>
+      </div>
+    </div>
+<div class="c14103009" id ="Div16">
+<asp:DataList ID="DataList2" runat="server" RepeatColumns="10"  >
+                　<ItemTemplate >    
+<div id='<%#Eval ("PAGE") %>' class ="c13042901 " onclick ="farea_click('<%#Eval ("PAGE") %>')">
+    <%#Eval ("MACHINE_AREA_ID") %>區</div>            
+</ItemTemplate> 　
+</asp:DataList>
+           </div>
+            </div>
+<iframe   id="wk" name="ContentP" frameborder="0"  
+        style="height: 100%; width :100% "  ></iframe>
+    </div>
+      </div>
+
+  </div>
+    
+<script type ="text/javascript">
+    function myrefresh() {
+        window.location.reload();
+    }
+    setTimeout('myrefresh()', 1000000); //指定100秒強行刷新瀏覽器，使崩潰的瀏覽器恢復正常顯示 160817
+</script>
+    <script type ="text/javascript" >
+        var arrbuild_no = new Array();
+        var url = window.location.search;
+        var s = url.indexOf("?");
+        var t = url.substring(s + 1);
+        var t1 = t.split('&');
+        var area_count;
+        var build_no = document.getElementById("build_no").value;
+        var fabn=document.getElementById("fabn").value;
+        var if_separate=document.getElementById("if_separate").value;
+        var update=document.getElementById("Text1").value;
+        var page=document.getElementById("page").value;
+        var Invocation = document.getElementById("wk");
+        var if_show_option = document.getElementById("if_show_option").value;
+        var roller_speed = document.getElementById("roller_speed").value;
+        var obj2=0;
+        Invocation.target = "ContentP";
+
+        window.onload = function onload1() {
+            if (document.getElementById("hint").value =="網絡鏈接中斷") {
+                document.getElementById("ShowByStringLabel").innerText = document.getElementById("hint").value;
+                //location.reload()//當出現錯誤頁時強制刷新瀏覽器 使頁面恢復正常 160817
+              
+                location.replace("error_page.aspx?id=" + document.getElementById("url").value);//如果網絡中斷將鏈接到一個類似日常畫面的錯誤頁
+                //location.replace(document.getElementById("url").value);
+            }
+            else {
+       
+                if (document.getElementById("Text1").value != "") {
+                    timeInterval = document.getElementById("Text1").value * 1000;
+                }
+                else {
+                    var timeInterval = 10000;
+                }
+                area_count = document.getElementById("machine_area_count").value;//取得區域數量
+                if (x(timeInterval) == false) {
+                    //alert("只能輸入數字");
+                    setInterval(changeImg, 10000);//若輸入的值為非數值任按10秒計
+                }
+                else if (timeInterval >= 10000) {
+                    setInterval(changeImg, timeInterval);
+                }
+
+                else {
+                    //alert("刷新時間需大于等于10秒");
+                    setInterval(changeImg, 10000);//若輸入的值小于10秒任按10秒計
+                }
+                if (document.getElementById("if_separate").value == "1") {
+                    document.getElementById("Checkbox1").checked = true;
+
+                }
+                else {
+                    document.getElementById("Checkbox1").checked = false;
+                } 
+              
+                Invocation.src = "view.aspx?page="+page+"&update="+document.getElementById("Text1").value+
+                    "&if_separate=" + if_separate + "&fabn=" + fabn + "&build_no=" + build_no +
+                    "&if_show_option=" + if_show_option + "&roller_speed="+roller_speed+"";
+                if(if_separate==1)
+                {
+                    if (build_no == 'B' && page != 1) {//B棟只有一頁，沒有第二頁，不存在第二頁的對象控件
+                    }
+                    else {
+                        document.getElementById(page).className = "c13042902";//僅分區顯示時邊框顏色才選中
+                    }
+                }
+                if (if_show_option == "1") {
+                    document.getElementById("Checkbox2").checked = true;
+                    document.getElementById("i16051601").style.display="block";
+
+
+                }
+                else {
+                    document.getElementById("Checkbox2").checked = false;
+                    document.getElementById("i16051601").style.display="none";
+                }
+                document.getElementById("Text2").value = roller_speed;
+                if (x(document.getElementById("Text2").value) == false) {
+                    //alert("只能輸入數字");
+                    document.getElementById("Text2").value = 20;
+                   //若輸入的值為非數值任按1ms計
+                }
+                else if (document.getElementById("Text2").value <1) {
+                    document.getElementById("Text2").value = 1;
+                    //若輸入的值小于1按1ms計
+                }
+             
+
+            }
+        }
+
+        function changeImg() {
+            if (s == -1) {
+                farea(0);
+            }
+            else if (t1.length > 0) {
+                farea(t1[0].substring(5));//截取區域數值
+            }
+        }
+        function farea(obj) {
+            if (parseInt(obj) >= area_count) {
+                obj = 1;
+                location.replace("main.aspx?page=" +obj + "&update=" + document.getElementById("Text1").value +
+             "&if_separate=" + document.getElementById("if_separate").value +
+             "&fabn=" + fabn + "&build_no=" + build_no + "&if_show_option=" + if_show_option +
+             "&roller_speed=" + document.getElementById("Text2").value + "")
+
+                Invocation.src = "view.aspx?page="+obj+"&update="+document.getElementById("Text1").value+
+                    "&if_separate=" + if_separate + "&fabn=" + fabn + "&build_no=" + build_no +
+                    "&if_show_option=" + if_show_option +
+                    "&roller_speed=" + document.getElementById("Text2").value + "";
+            }
+            else {
+
+                obj = parseInt(obj) + 1;
+                location.replace("main.aspx?page=" +obj + "&update=" +document.getElementById("Text1").value +
+  "&if_separate=" + document.getElementById("if_separate").value +
+  "&fabn=" + fabn + "&build_no=" + build_no + "&if_show_option=" + if_show_option +
+  "&roller_speed=" + document.getElementById("Text2").value + "")
+                Invocation.src = "view.aspx?page="+obj+"&update="+document.getElementById("Text1").value+
+                    "&if_separate=" + if_separate + "&fabn=" + fabn + "&build_no=" + build_no +
+                    "&if_show_option=" + if_show_option + "&roller_speed=" + document.getElementById("Text2").value + "";
+            }
+
+        }
+        function farea_click(obj) {
+            location.replace("main.aspx?page=" +obj + "&update=" +document.getElementById("Text1").value +
+"&if_separate=" + document.getElementById("if_separate").value +
+"&fabn=" + fabn + "&build_no=" + build_no + "&if_show_option=" + if_show_option +
+"&roller_speed=" + document.getElementById("Text2").value + "")
+            Invocation.src = "view.aspx?page="+obj+"&update="+document.getElementById("Text1").value+
+                "&if_separate=" + if_separate + "&fabn=" + fabn + "&build_no=" + build_no + "&if_show_option=" + if_show_option +
+                "&roller_speed=" + document.getElementById("Text2").value + "";
+        }
+        function f15060702() {
+
+            if (document.getElementById("Checkbox1").checked == true) {
+                location.replace("main.aspx?page=" + t1[0].substring(5) + 
+                    "&update=" + document.getElementById("Text1").value + "&if_separate=1&fabn="+fabn+
+                    "&build_no=" + build_no + "&if_show_option=" + if_show_option +
+                    "&roller_speed=" + document.getElementById("Text2").value + "");
+            }
+            else {
+                location.replace("main.aspx?page=" + t1[0].substring(5) + 
+                    "&update=" + document.getElementById("Text1").value + "&if_separate=0&fabn="+fabn+
+                    "&build_no=" + build_no + "&if_show_option=" + if_show_option +
+                    "&roller_speed=" + document.getElementById("Text2").value + "");
+            }
+        
+        }
+        function f15060703() {
+
+            if (document.getElementById("Checkbox2").checked == true) {
+                location.replace("main.aspx?page=" + t1[0].substring(5) + 
+                    "&update=" + document.getElementById("Text1").value + "&if_separate="+if_separate+"&fabn="+fabn+
+                    "&build_no=" + build_no + "&if_show_option=1&roller_speed=" + document.getElementById("Text2").value + "");
+            }
+            else {
+                location.replace("main.aspx?page=" + t1[0].substring(5) + 
+                    "&update=" + document.getElementById("Text1").value + "&if_separate="+if_separate+"&fabn="+fabn+
+                    "&build_no=" + build_no + "&if_show_option=0&roller_speed=" + document.getElementById("Text2").value + "");
+            }
+        
+        }
+        function b(obj) {
+            var dom = document.all;
+            var ele = event.srcElement;
+            if (ele.tagName == "INPUT" && ele.type.toLowerCase() == "radio")
+            {
+                for (i = 0; i < dom.length; i++)
+                {
+                    if (dom[i].tagName == "INPUT" && dom[i].type.toLowerCase() == "radio")
+                    { dom[i].checked = false; }
+                }
+            }
+            ele.checked = true;
+            location.replace("main.aspx?page=" +t1[0].substring(5) + "&update=" + document.getElementById("Text1").value +
+                                    "&if_separate=" + document.getElementById("if_separate").value + 
+                                    "&fabn=" + fabn + "&build_no=" + obj + "&if_show_option=" + if_show_option +
+                                    "&roller_speed=" + document.getElementById("Text2").value + "")
+
+        }
+        function x(s) {
+            var test = /^[0-9]*$/;
+            var result = test.test(s);
+            return result;
+        }
+        function enter2tab(e) {
+            if (window.event.keyCode == 13) window.event.keyCode = 9
+        }
+        document.onkeydown = enter2tab;
+        </script>
+
+          </form> 
+</body>
+
+</html>

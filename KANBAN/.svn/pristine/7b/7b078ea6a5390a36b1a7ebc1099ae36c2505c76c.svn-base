@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WEB_MES_FOR_KANBAN
+{
+    public partial class error_page : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Image image = new Image();
+            image.ImageUrl = "image/error_page.png";
+            Controls.Add(image);
+            if (Request.QueryString["id"] != null && Request.QueryString["id"] != "")
+            {
+                //Response.Redirect(Request.QueryString["id"].ToString());
+                //Response.Redirect("http://192.168.0.15/kanban");
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using CMES;
+namespace WEB_MES_FOR_KANBAN
+{
+    public partial class error_page : System.Web.UI.Page
+    {
+        SendMail sendmail = new SendMail();
+        CKANBAN ckanban = new CKANBAN();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Image image = new Image();
+            image.ImageUrl = "image/error_page.png";
+            Controls.Add(image);
+            HttpCookie cookie = Request.Cookies["cookiename"];
+            if (Request.QueryString["id"] != null && Request.QueryString["id"] != "")
+            {
+                Response.Redirect(Request.QueryString["id"].ToString());
+                sendmail.send_email("WEB 成型看板出現異常", 
+                 ckanban.error_info("main.aspx", cookie.Values["IP"].ToString(), cookie.Values["START_TIME"].ToString()),
+                 sendmail.LIST, "mes_admin@acesconn.com");
+            }
+        }
+    }
+}

@@ -1,0 +1,191 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Net;
+using CMES;
+using System.Data;
+namespace WEB_MES_FOR_KANBAN
+{
+    public partial class _Default : System.Web.UI.Page
+    {
+        basec bc = new basec();
+        DataTable dt = new DataTable();
+        #region nature
+        private static string _PROCESS;
+        public static string PROCESS
+        {
+            set { _PROCESS = value; }
+            get { return _PROCESS; }
+
+        }
+        private static string _FACTORY_AREA;
+        public static string FACTORY_AREA
+        {
+            set { _FACTORY_AREA = value; }
+            get { return _FACTORY_AREA; }
+
+        }
+        private static string _FACTORY_AREA_CODE;
+        public static string FACTORY_AREA_CODE
+        {
+            set { _FACTORY_AREA_CODE = value; }
+            get { return _FACTORY_AREA_CODE; }
+
+        }
+        private static string _FABN;
+        public static string FABN
+        {
+            set { _FABN = value; }
+            get { return _FABN; }
+
+        }
+        private static string _SQLCONN;
+        public static string SQLCONN
+        {
+            set { _SQLCONN = value; }
+            get { return _SQLCONN; }
+
+        }
+        private static string _EMID;
+        public static string EMID
+        {
+            set { _EMID = value; }
+            get { return _EMID; }
+
+        }
+        private static string _IP;
+        public static string IP
+        {
+            set { _IP = value; }
+            get { return _IP; }
+
+        }
+        private static string _ENAME;
+        public static string ENAME
+        {
+            set { _ENAME = value; }
+            get { return _ENAME; }
+
+        }
+        private static string _DEPART;
+        public static string DEPART
+        {
+            set { _DEPART = value; }
+            get { return _DEPART; }
+
+        }
+        private string _GEID;
+        public string GEID
+        {
+            set { _GEID = value; }
+            get { return _GEID; }
+
+        }
+        #endregion
+        protected void Page_Load(object sender, EventArgs e)
+        {
+          
+                  if (!IsPostBack)
+                  {
+                      dt = bc.factorychoose();//  取得廠區信息
+                      dt = bc.RETURN_NOHAVE_REPEAT_DT(dt, "FACTORY_AREA_CODE");//取得不含重復信息的廠別
+                      string ip =  Context.Request.ServerVariables["REMOTE_ADDR"].ToString();
+                      if (ip == "::1")//如果取到的是IPV6的本機地址，那么調用本機IP,否則就是調用客戶端IP
+                      {
+                          IP = bc.GetIP4Address();
+                      }
+                      else
+                      {
+                          IP = ip;
+                      }
+                      FACTORY_AREA_CODE = bc.factorychoose(IP).Rows[0]["FACTORY_AREA_CODE"].ToString();//  取得當前IP對應的廠區代碼
+                      DataTable dtx = bc.GET_DT_TO_DV_TO_DT(bc.factorychoose(), "", "FACTORY_AREA_CODE='" + FACTORY_AREA_CODE + "'");
+                      if (dtx.Rows.Count > 0)
+                      {
+                          FABN = dtx.Rows[0]["FABN"].ToString();//取得廠別簡碼
+                      }
+                      try
+                      {
+                          //dt = bc.GET_DT_TO_DV_TO_DT(dt, "", "VALUE='"+FACTORY_AREA_CODE +"'");
+                          if (dt.Rows.Count > 0)
+                          {
+                              for(int i=0;i<dt.Rows .Count;i++)
+                              {
+                                  RadioButtonList1.Items.Add(dt.Rows [i]["VALUE"].ToString());
+                                  if (dt.Rows[i]["VALUE"].ToString() == FACTORY_AREA_CODE)
+                                  {
+                                      this.RadioButtonList1.SelectedIndex = i;//將當前IP所處的廠區默認為選中項
+                                  }
+                              }
+                          }
+                          dt = RETURN_EMPTY_DT();
+                          string[] process = { "成型"};
+                          PROCESS = process[0];
+                          for (int i = 0; i < process.Length; i++)
+                          {
+                              DataRow dr = dt.NewRow();
+                              dr["RADIO"] = (i + 1);
+                              dr["PROCESS"] = process[i];
+                              dt.Rows.Add(dr);
+                          }
+                          DataList2.DataSource = dt;
+                          DataList2.DataBind();
+
+                      }
+                      catch (Exception)
+                      {
+                          hint.Value = "網絡鏈接中斷";
+                      }
+                  }
+        }
+        private DataTable RETURN_EMPTY_DT()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("RADIO", typeof(string));
+            dt.Columns.Add("PROCESS", typeof(string));
+            return dt;
+        }
+        protected void btnLogin_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                SQLCONN = bc.md_GetConnectionString(FACTORY_AREA_CODE);//根據不同廠區取得鏈接字符串 此屬性值由 RadioButtonList1選中后取得
+                //SQLCONN = bc.md_GetConnectionString(bc.factorychoose(bc.GetIP4Address()).Rows[0]["FACTORY_AREA"].ToString());//根據本地IP取得鏈接字符串
+                DataTable dtx = bc.GET_DT_TO_DV_TO_DT(bc.factorychoose(), "", "FACTORY_AREA_CODE='" + FACTORY_AREA_CODE + "'");
+                if (dtx.Rows.Count > 0)
+                {
+                    FACTORY_AREA = dtx.Rows[0]["FACTORY_AREA"].ToString();//  取得廠區信息
+                }
+                HttpCookie cookie = new HttpCookie("cookiename");
+                cookie.Values.Add("FACTORY_AREA_CODE", FACTORY_AREA_CODE);
+                cookie.Values.Add("PROCESS", PROCESS);
+                cookie.Values.Add("selfactory", FABN);
+                cookie.Values.Add("FACTORY_AREA", FACTORY_AREA);
+                cookie.Values.Add("IP", IP);
+                cookie.Values.Add("START_TIME", DateTime .Now .ToString ("yyyy/MM/dd HH:mm:ss").Replace("-","/"));
+                Response.AppendCookie(cookie);
+                cookie.Expires = DateTime.Now.AddDays(365);
+                Response.Redirect("main.aspx?page=1&update=100&if_separate=1&fabn=" + FABN+
+                    "&build_no=all&if_show_option=0&roller_speed=20");
+            }
+            catch (Exception)
+            {
+                hint.Value = "網絡鏈接中斷";
+            }
+        }
+        protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FACTORY_AREA_CODE = RadioButtonList1.SelectedItem.Value;//取得選中的廠區代碼
+            dt = bc.factorychoose();
+            dt = bc.GET_DT_TO_DV_TO_DT(dt, "", "FACTORY_AREA_CODE='" + FACTORY_AREA_CODE + "'");
+            if (dt.Rows.Count > 0)
+            {
+                FABN = dt.Rows[0]["FABN"].ToString();//取得廠別簡碼
+            }
+       
+        }
+    }
+}

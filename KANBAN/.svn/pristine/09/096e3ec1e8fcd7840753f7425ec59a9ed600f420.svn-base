@@ -1,0 +1,314 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using CMES;
+using System.Drawing;
+using System.Data;
+using System.Text;
+
+
+
+namespace WEB_MES_FOR_KANBAN
+{
+    public partial class VIEW : System.Web.UI.Page
+    {
+        #region nature
+        private static string _FACTORY_AREA;
+        public static string FACTORY_AREA
+        {
+            set { _FACTORY_AREA = value; }
+            get { return _FACTORY_AREA; }
+        }
+        private static string _FACTORY_AREA_CODE;
+        public static string FACTORY_AREA_CODE
+        {
+            set { _FACTORY_AREA_CODE = value; }
+            get { return _FACTORY_AREA_CODE; }
+        }
+        private static string _FABN;
+        public static string FABN
+        {
+            set { _FABN = value; }
+            get { return _FABN; }
+
+        }
+        private string _IP;
+        public string IP
+        {
+            set { _IP = value; }
+            get { return _IP; }
+
+        }
+        private static string _SQLCONN;
+        public static string SQLCONN
+        {
+            set { _SQLCONN = value; }
+            get { return _SQLCONN; }
+        }
+        private static string _MACHINE_AREA_ID;
+        public static string MACHINE_AREA_ID
+        {
+            set { _MACHINE_AREA_ID = value; }
+            get { return _MACHINE_AREA_ID; }
+        }
+        private string _BUILD_NO;
+        public string BUILD_NO
+        {
+            set { _BUILD_NO = value; }
+            get { return _BUILD_NO; }
+        }
+        #endregion
+        basec bc = new basec();
+        DataTable FACTORY_AREA_dr_worktime_standard =new DataTable(); //調用交班基準表 
+        StringBuilder sqb = new StringBuilder();
+        DataTable dt1 = new DataTable();//取得有關生產數據的數據表
+        CKANBAN ckanban = new CKANBAN();
+        DataTable dtt = new DataTable();//申明一個用于臨時數據存儲的DATATABLE
+        string machineBuildNo = "";//取得棟別
+        SendMail sendmail = new SendMail();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            
+           HttpCookie cookie = Request.Cookies["cookiename"];
+          
+            try
+            {
+               
+                if (cookie.Values["selfactory"] == null)
+                {
+                    Response.Redirect("\\Default.aspx");
+                }
+                if (!IsPostBack)
+                {
+                    if (Request.QueryString["FABN"] != null && Request.QueryString["FABN"] != "")
+                    {
+                        FABN = Request.QueryString["FABN"].ToString();
+                        SQLCONN = bc.md_GetConnectionString(FABN);//取得鏈接字符串
+                        fabn.Value = FABN;
+                        FACTORY_AREA_CODE = bc.GET_DT_TO_DV_TO_DT(bc.factorychoose(), "", "FABN='" + FABN + "'").Rows[0]["FACTORY_AREA_CODE"].ToString();
+
+                    }
+                    if (Request.QueryString["build_no"] != null && Request.QueryString["build_no"] != "")
+                    {
+                        build_no.Value = Request.QueryString["build_no"].ToString();
+                        BUILD_NO = Request.QueryString["build_no"].ToString();
+                    }
+                    if (Request.QueryString["page"] != null && Request.QueryString["page"] != "")
+                    {
+                        page.Value = Request.QueryString["page"].ToString();
+
+                    }
+                    if (Request.QueryString["roller_speed"] != null && Request.QueryString["roller_speed"] != "")
+                    {
+                        roller_speed.Value = Request.QueryString["roller_speed"].ToString();
+
+                    }
+                    bind();
+                    Bind("");
+                }
+            }
+            catch (Exception ex)
+            {
+                
+              
+                sendmail.send_email("WEB 成型看板出現異常",ex.Message+
+                    ckanban.error_info("view.aspx",cookie.Values["IP"].ToString (),cookie.Values["START_TIME"].ToString()) ,
+                    sendmail.LIST , "mes_admin@acesconn.com");
+                hint.Value = "網絡鏈接中斷";
+            }
+        }
+        #region bind
+        private void bind()
+        {
+            string starttime_in = datecka();//starttime_in = 開始時間 
+            string endtime_in = Convert.ToDateTime(DateTime.Now).ToString("yyyy-MM-dd HH:mm").ToString();
+            if (FACTORY_AREA_CODE=="KS" && (BUILD_NO =="A" || BUILD_NO =="B"))
+            {
+                machineBuildNo = BUILD_NO;//只有昆山廠有A,B棟之分
+            }
+            string exeo_Id = "";//執行單號 '接值說明 exeno_in = '執行單號',, ,  endtime_in = '結束時間'
+            string type_in = "ALL";//'計算方式'('';'ALL')
+
+            string sql1 = @"EXEC MES2_ModuleByEfficiency_sp '" + exeo_Id + "','" + type_in + "','" + starttime_in + "','" + endtime_in + "','" + machineBuildNo + "' ";//取得含效率的DATATABLE SQL
+        
+            DataTable dt = bc.getdt(sql1, SQLCONN);
+            DataTable dtt = RETURN_EMPTY_DT();
+            DataRow dr = dtt.NewRow();
+            dr["TIME"] = 1;
+            double total_efficiency = 0;
+            if (dt.Rows.Count > 0)
+            {
+                total_efficiency = Convert.ToDouble(bc.RETURN_UNTIL_CHAR(dt.Rows[0]["總效率"].ToString(), '%'));
+            }
+            dr["TOTAL_EFFICIENCY"] = total_efficiency;
+            dtt.Rows.Add(dr);
+            if (Request.QueryString["update"] != null && Request.QueryString["update"] != "")
+            {
+                update.Value = Request.QueryString["update"].ToString();
+            }
+            if (Request.QueryString["if_separate"] != null && Request.QueryString["if_separate"] != "")
+            {
+                if_separate.Value  = Request.QueryString["if_separate"].ToString();
+            }
+        }
+        #endregion
+        #region Bind
+        protected void Bind(string machine_area_id)
+        {
+           
+            DataTable dt = bc.getdt(ckanban.sql, SQLCONN);
+            if (FACTORY_AREA_CODE == "KS" && (BUILD_NO == "A" || BUILD_NO == "B"))
+            {
+                machineBuildNo = BUILD_NO;//只有昆山廠有A,B棟之分
+                dt = bc.GET_DT_TO_DV_TO_DT(dt, "", "drma_building='" + machineBuildNo + "'");
+            }
+            DataTable dtx = new DataTable();
+            dtx.Columns.Add("drma_machine", typeof(string));
+            dtx.Columns.Add("drma_drst_eventshow", typeof(string));
+            dtx.Columns.Add("drma_exeno", typeof(string));
+            dtx.Columns.Add("drma_modno", typeof(string));
+            dtx.Columns.Add("drma_partno", typeof(string));
+            dtx.Columns.Add("drma_production_shedule", typeof(string));
+            dtx.Columns.Add("image_url", typeof(string));
+            dtx.Columns.Add("d_font_color", typeof(string));
+            dtx.Columns.Add("d_background_color", typeof(string));
+            foreach (DataRow dr in dt.Rows)
+            {
+                DataRow dr1 = dtx.NewRow();
+                dr1["drma_machine"] = dr["drma_machine"].ToString();
+                dr1["drma_drst_eventshow"] = dr["drma_drst_eventshow"].ToString();
+                dr1["drma_exeno"] = dr["drma_exeno"].ToString();
+                dr1["drma_modno"] = dr["drma_modno"].ToString();
+                dr1["drma_partno"] = dr["drma_partno"].ToString();
+                dr1["drma_production_shedule"] = "生產進度：" + dr["生產進度"].ToString();
+                switch (dr["drma_drst_eventshow"].ToString())
+                {
+                    case "A-正常生產":
+                        dr1["image_url"] = "Image/Amachine.gif";
+                        dr1["d_font_color"] = "White";
+                        dr1["d_background_color"] = "Green";
+                        break;
+                    case "B-待單":
+                        dr1["image_url"] = "Image/ma1.png";
+                        dr1["d_font_color"] = "Black";
+                        dr1["d_background_color"] = "Yellow";
+                        break;
+                    default:
+                        dr1["image_url"] = "Image/ma1.png";
+                        dr1["d_font_color"] = "White";
+                        dr1["d_background_color"] = "Red";
+                        break;
+
+                }
+                //試模執行單都用橘色
+                if (dr["生產進度數值"].ToString() == "MM")
+                {
+                    dr1["d_background_color"] = "Orange";
+                }
+                if (Convert.ToInt32(dr["生產進度數值"].ToString()) > 100)
+                {
+                    dr1["image_url"] = "Image/lampbig.gif";
+                }
+                dtx.Rows.Add(dr1);
+            }
+            DataTable dtx2 = bc.RETURN_NOHAVE_REPEAT_DT(dt, "drma_class"); //取得區域信息
+            dtt.Columns.Add("MACHINE_AREA_ID", typeof(string));
+            dtt.Columns.Add("PAGE", typeof(string));
+            if (dtx2.Rows.Count > 0)
+            {
+                for (int i = 0; i < dtx2.Rows.Count; i++)
+                {
+                    DataRow dr = dtt.NewRow();
+                    dr["MACHINE_AREA_ID"] = dtx2.Rows[i]["VALUE"].ToString();
+                    dr["PAGE"] = (i + 1).ToString();
+                    dtt.Rows.Add(dr);
+                }
+            }
+            machine_area_count.Value = dtt.Rows.Count.ToString();
+         
+            if (Request.QueryString["if_separate"] != null && Request.QueryString["if_separate"] != "")
+            {
+                if (Request.QueryString["if_separate"].ToString() == "1")
+                {
+                    if (Request.QueryString["page"] != null && Request.QueryString["page"] != "")//分區顯示
+                    {
+
+                        dtt = bc.GET_DT_TO_DV_TO_DT(dtt, "", string.Format("PAGE='{0}'", Request.QueryString["page"].ToString()));
+                        if (dtt.Rows.Count > 0)
+                        {
+                            MACHINE_AREA_ID = dtt.Rows[0]["MACHINE_AREA_ID"].ToString();
+                        }
+
+                        if (dtx.Rows.Count > 0)
+                        {
+                            dtx = bc.GET_DT_TO_DV_TO_DT(dtx, "", string.Format("substring(drma_machine,1,1)='{0}'",
+                                MACHINE_AREA_ID));
+                        }
+                    }
+                    else
+                    {
+
+                        MACHINE_AREA_ID = machine_area_id;
+                    }
+                    dtx = bc.GET_DT_TO_DV_TO_DT(dtx, "", string.Format("substring(drma_machine,1,1)='{0}'",
+                                MACHINE_AREA_ID));
+                }
+                else
+                {//全區顯示
+                }
+            }
+         
+            DataList1.DataSource = dtx;
+            DataList1.DataBind();
+        }
+        #endregion
+        private string datecka()
+        {
+            string ds = "";
+            if (DateTime.Now.Hour >= 7 && DateTime.Now.Hour <= 23)
+            {
+                ds = DateTime.Now.AddDays(0).ToString("yyyy/MM/dd") + " 7:30";
+            }
+            else
+            {
+                ds = DateTime.Now.AddDays(-1).ToString("yyyy/MM/dd") + " 19:30";
+            }
+            return ds;
+        }
+        private DataTable RETURN_EMPTY_DT()
+        {
+            DataTable dtt = new DataTable();
+            dtt.Columns.Add("TIME", typeof(string));
+            dtt.Columns.Add("TOTAL_EFFICIENCY", typeof(string));
+            return dtt;
+        }
+        private DataTable RETURN_EMPTY_DT_BUILDING()
+        {
+            DataTable dtt = new DataTable();
+            dtt.Columns.Add("BUILD_NO", typeof(string));
+            return dtt;
+        }
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Session["FACTORY_AREA"] = null;
+            Session["PROCESS"] = null;
+            ClearClientPageCache();
+            Response.Redirect("Default.aspx"); 
+        }
+        public void ClearClientPageCache()
+        {
+            //清除浏览器缓存 
+            Response.Buffer = true;
+            Response.ExpiresAbsolute = DateTime.Now.AddDays(-1);
+            Response.Cache.SetExpires(DateTime.Now.AddDays(-1));
+            Response.Expires = 0;
+            Response.CacheControl = "no-cache";
+            Response.Cache.SetNoStore();
+        }
+    }
+}

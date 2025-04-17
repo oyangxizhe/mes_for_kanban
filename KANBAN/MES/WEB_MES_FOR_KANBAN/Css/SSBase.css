@@ -1,0 +1,87 @@
+﻿
+	  
+	  
+	  body { width:100%; margin-left:auto; margin-right:auto;font-size:12px; margin-top:0px; margin-bottom:0px;
+}
+
+
+/*Default页面*/
+.Default_top{height:75px; background-image:url('../Image/bg.png');background-position:0px 0px;width:100%; margin-top:0px; color:White; line-height:75px; }
+.Default_bottom{height:75px; background-image:url('/Image/logo.png'); background-position:0px -135px;width:100%; line-height:75px; text-align:center;}
+
+/*超链接样式*/
+a{ color:#4D784D;}
+a:link{ color:#4D784D;}/*普通*/
+a:visited{ color:#4D784D;}/*已访问的*/
+a:hover{ color:#FF7700;}/*鼠标接触的*/
+a:active{ color:#FF7700;}/*积活的*/
+.c13061201
+{
+font-size :9pt;
+color :#595d5a;
+}
+.c13061202
+{
+font-size :9pt;
+color :#595d5a;
+}
+body,td,th {
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	/*font-size: 14px;*/
+	
+}
+
+
+.c1312050201
+{
+	border-style: groove; border-width: thin;
+	height :30px;
+	width:138px;
+	line-height :30px;
+}
+.c1312050202
+{
+	color:#595d5a;
+ margin-top :10px;
+	 
+	  margin-left :43.4%;
+	 margin-top :10px;
+}
+.c14112101
+{
+	float :left ; width:100%; 
+	border-style :none;
+    
+}
+.c16042202
+{
+	float :left ; width:100%; 
+	border-style :none;
+    background-color:#efdaec;
+    height :30px;
+	width:140px;
+	line-height :30px;
+}
+.c14112102
+{
+ float :left ;  width:8%; height :7%;  margin-top :0%; margin-left :3%;
+font-size:20px;
+
+}
+.c14112103
+{
+  
+	float :left ; width:55%; height :7%;
+	 background-color:#e8e179;
+}
+.c15060701
+{
+	color:blue;
+}
+.c16042201
+{
+float:left; width:60%; 
+height:30px;  
+text-align :center;
+line-height :30px;
+}

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/AjaxControlToolkit.dll">
+      <publishTime>08/23/2016 11:39:22</publishTime>
+    </File>
+    <File Include="bin/CMES.dll">
+      <publishTime>05/12/2017 13:26:02</publishTime>
+    </File>
+    <File Include="bin/DundasWebGauge.dll">
+      <publishTime>08/23/2016 11:39:22</publishTime>
+    </File>
+    <File Include="bin/WEB_MES_FOR_KANBAN.dll">
+      <publishTime>05/12/2017 13:35:56</publishTime>
+    </File>
+    <File Include="Css/120610.css">
+      <publishTime>08/23/2016 11:39:13</publishTime>
+    </File>
+    <File Include="Css/130426b.css">
+      <publishTime>08/23/2016 11:39:13</publishTime>
+    </File>
+    <File Include="Css/c072701.css">
+      <publishTime>08/23/2016 11:39:13</publishTime>
+    </File>
+    <File Include="Css/c120807o.css">
+      <publishTime>08/23/2016 11:39:13</publishTime>
+    </File>
+    <File Include="Css/S130424.css">
+      <publishTime>08/23/2016 11:39:13</publishTime>
+    </File>
+    <File Include="Css/S131017.css">
+      <publishTime>08/23/2016 11:39:13</publishTime>
+    </File>
+    <File Include="Css/SSBase.css">
+      <publishTime>08/23/2016 11:39:13</publishTime>
+    </File>
+    <File Include="Css/view.css">
+      <publishTime>05/30/2017 10:48:03</publishTime>
+    </File>
+    <File Include="Default.aspx">
+      <publishTime>04/17/2017 21:26:38</publishTime>
+    </File>
+    <File Include="error_page.aspx">
+      <publishTime>03/29/2017 17:09:02</publishTime>
+    </File>
+    <File Include="Image/11.png">
+      <publishTime>10/27/2016 13:41:51</publishTime>
+    </File>
+    <File Include="Image/2.gif">
+      <publishTime>08/23/2016 11:39:14</publishTime>
+    </File>
+    <File Include="Image/22.png">
+      <publishTime>10/27/2016 13:42:28</publishTime>
+    </File>
+    <File Include="Image/3.png">
+      <publishTime>04/17/2017 22:31:12</publishTime>
+    </File>
+    <File Include="Image/33.png">
+      <publishTime>10/27/2016 13:42:14</publishTime>
+    </File>
+    <File Include="Image/a1.png">
+      <publishTime>01/05/2017 11:08:15</publishTime>
+    </File>
+    <File Include="Image/a2.png">
+      <publishTime>01/05/2017 11:08:51</publishTime>
+    </File>
+    <File Include="Image/a3.png">
+      <publishTime>01/05/2017 11:07:14</publishTime>
+    </File>
+    <File Include="Image/Amachine.gif">
+      <publishTime>08/23/2016 11:39:14</publishTime>
+    </File>
+    <File Include="Image/bg.png">
+      <publishTime>08/23/2016 11:39:14</publishTime>
+    </File>
+    <File Include="Image/btnlogin4.png">
+      <publishTime>08/23/2016 11:39:14</publishTime>
+    </File>
+    <File Include="Image/lampbig.gif">
+      <publishTime>08/23/2016 11:39:14</publishTime>
+    </File>
+    <File Include="Image/loading.gif">
+      <publishTime>08/23/2016 11:39:14</publishTime>
+    </File>
+    <File Include="Image/logo2.png">
+      <publishTime>04/17/2017 22:21:43</publishTime>
+    </File>
+    <File Include="Image/logo_index.png">
+      <publishTime>04/17/2017 22:27:06</publishTime>
+    </File>
+    <File Include="Image/ma1.png">
+      <publishTime>08/23/2016 11:39:14</publishTime>
+    </File>
+    <File Include="Image/top.jpg">
+      <publishTime>08/23/2016 11:39:14</publishTime>
+    </File>
+    <File Include="Js/jquery.min.js">
+      <publishTime>08/23/2016 11:39:14</publishTime>
+    </File>
+    <File Include="Main.aspx">
+      <publishTime>04/17/2017 22:32:32</publishTime>
+    </File>
+    <File Include="VIEW.aspx">
+      <publishTime>04/17/2017 22:08:03</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/30/2017 10:48:03</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
